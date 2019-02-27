@@ -3,27 +3,39 @@ var Schema = mongoose.Schema;
 
 var articlesSchema = new Schema({
 
+
+
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        sparse: true
 
 
     },
     summary: {
         type: String,
+        required: true,
+        unique: true,
+        sparse: true
 
     },
     link: {
         type: String,
+        required: true,
+        unique: true,
+        sparse: true
+
 
     },
     comments: {
-        type: String,
-
+        type: Schema.Types.ObjectId,
+        ref: "Comments"
 
     }
+
 })
 
-b
 
-module.exports = articles
+var articles = mongoose.model("Articles", articlesSchema);
+module.exports = articles;

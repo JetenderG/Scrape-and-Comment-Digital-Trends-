@@ -1,0 +1,14 @@
+{{#each allarticles}}
+<div class="row" data-id="{{this._id}}">
+    <p class=" titleS">{{this.title}}</p>
+    <p class="sumS">{{this.summary}}</p>
+    <a href="{{this.link}}">
+        <p class="linkS">Link to the main article</p>
+
+    </a>
+    <button class="saveS" id="saveCom"></button>
+</div>
+
+</div>
+
+{{/each}}
