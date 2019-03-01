@@ -24,6 +24,7 @@ module.exports =
                 })
             }).catch(function (err) {
                 // res.render("commentA")
+
                 console.log(err);
 
 

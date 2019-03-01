@@ -7,11 +7,9 @@
         <p class="linkS">Link to the main article</p>
 
     </a>
-    <button class="saveS" id="saveCom"></button>
 
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}}>
-        Launch demo modal
+    <button type="button" class="btn btn-primary" id="populate" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}}>
     </button>
 
 
@@ -28,11 +26,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <textarea class="textareaS" id="textComment">
-
-
-
-
+                    <form class="submitComment" action="/newcomment" method="POST">
+                        <input class="idpopS" name="id" value="{{this._id}}">
+                        <textarea class="textareaS" id="textComment" name="text">
 
 
 
@@ -40,7 +36,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="add">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="add">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>

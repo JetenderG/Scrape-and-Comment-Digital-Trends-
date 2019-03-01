@@ -33,16 +33,45 @@ module.exports =
                 });
             });
 
+        });
 
 
 
+        app.post("/newcomment", function (req, res) {
+            var text = req.body.text;
+            var id = req.body.id;
+            console.log(req.body)
+            db.comments.create(req.body.text).then(function (comment) {
+                console.log("efsfsfsefsfsefsfsesf   " + comment)
+                return db.article.findByIdAndUpdate({ id }, { $push: { comments: text } }, { new: true })
+            }).then(function (results) {
+                console.log("WAFWAFFFFFF        " + results)
+                // If the Library was updated successfully, send it back to the client
+                res.alert("comment added")
 
-
-
-
-
+            })
+                .catch(function (err) {
+                    // If an error occurs, send it back to the client
+                    res.json(err);
+                });
 
         })
+
+        app.get("/allcomments/:id", function (req, res) {
+            console.log("EGHEESGSEG       " + req.params)
+            // Using our Library model, "find" every library in our db and populate them with any associated books
+            db.article.find({ _id: req.params.id })
+                // Specify that we want to populate the retrieved libraries with any associated books
+                .populate("comments")
+                .then(function (data) {
+                    // If any Libraries are found, send them to the client with any associated Books
+                    res.send(data);
+                })
+                .catch(function (err) {
+                    // If an error occurs, send it back to the client
+                    res.json(err);
+                });
+        });
 
 
     }

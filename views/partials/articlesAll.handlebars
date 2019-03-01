@@ -1,14 +1,16 @@
 {{#each allarticles}}
-<div class="row" data-id="{{this._id}}">
-    <p class=" titleS">{{this.title}}</p>
-    <p class="sumS">{{this.summary}}</p>
+<div class="row articlerow" data-id="{{this._id}}">
+    <p class=" titleS"><strong>Title :</strong>{{this.title}}</p>
+    <p class="sumS"><strong>Summary :</strong>{{this.summary}}</p>
     <a href="{{this.link}}">
         <p class="linkS">Link to the main article</p>
 
     </a>
-    <button class="saveS" id="saveCom"></button>
-</div>
+
+    <button class="saveS" id="saveCom">Save</button>
+
 
 </div>
+
 
 {{/each}}

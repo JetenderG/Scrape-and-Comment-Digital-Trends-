@@ -1,0 +1,19 @@
+.articlerow{
+    width: 100%;
+    overflow:auto;
+    height: auto;
+    float: left;
+    border: solid black 1px;
+    border-radius: 15px;
+    margin:40px;
+    padding: 20px;
+}
+.btnSaveS{
+    width: 100%;
+    margin-top: 20px;
+    border-top: solid black 1px;
+    padding: auto;
+}
+.saveS{
+    padding: auto;
+}

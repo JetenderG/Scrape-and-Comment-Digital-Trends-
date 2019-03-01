@@ -19,9 +19,9 @@ var API = {
             type: "POST"
         })
     },
-    saveComment: function (comment) {
+    allComment: function (comment) {
         return $.ajax({
-            url: "/comment/" + comment,
+            url: "/allcomments/" + comment,
             type: "POST"
         })
     }
@@ -49,14 +49,16 @@ var save = function () {
     })
 }
 
-var addComment = function () {
+var allC = function () {
 
-    var idpre = $(this).parent();
+    var idpre = $(this).parent().text();
 
 
-    var text = $(this).parent();
-    console.log(idpre)
-
+    var text = $(this).parent().data().id;
+    console.log(text)
+    API.allComment(text).then(function (response) {
+        console.log(response)
+    })
 }
 
 
@@ -64,4 +66,5 @@ var addComment = function () {
 $(".saveS").on("click", save)
 
 $("#scrape").on("click", scrap)
-$("#add").on("click", addComment)
+$("#populate").on("click", allC)
+//$("#add").on("click", addComment)
