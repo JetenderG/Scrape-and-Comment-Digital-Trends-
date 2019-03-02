@@ -7,13 +7,9 @@ var commentsSchema = new Schema({
         unique: true,
         sparse: true
 
-    },
-    article: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Articles"
     }
 })
 
 
-var comments = mongoose.model("Comments", commentsSchema);
-module.exports = comments;
+var Comments = mongoose.model("Comments", commentsSchema);
+module.exports = Comments;

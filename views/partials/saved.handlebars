@@ -1,12 +1,15 @@
 {{#each savedarticles}}
 
-<div class="row" data-id="{{this._id}}">
-    <p class=" titleS">{{this.title}}</p>
-    <p class="sumS">{{this.summary}}</p>
+<div class="row articlerow" data-id="{{this._id}}">
+    <p class=" titleS"><strong>Title :</strong>{{this.title}}</p>
+    <p class="sumS"><strong>Summary :</strong>{{this.summary}}</p>
     <a href="{{this.link}}">
         <p class="linkS">Link to the main article</p>
 
     </a>
+
+ 
+
 
 
     <button type="button" class="btn btn-primary" id="populate" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}}>
@@ -22,22 +25,21 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <button>
-                    </button>
                 </div>
+                 <div class="container commSection">
+                           
+                    </div>
                 <div class="modal-body">
                     <form class="submitComment" action="/newcomment" method="POST">
                         <input class="idpopS" name="id" value="{{this._id}}">
                         <textarea class="textareaS" id="textComment" name="text">
-
-
-
 </textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="add">Save changes</button>
                     </form>
+                   
                 </div>
             </div>
         </div>

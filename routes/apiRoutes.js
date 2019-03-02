@@ -40,17 +40,20 @@ module.exports =
         app.post("/newcomment", function (req, res) {
             var text = req.body.text;
             var id = req.body.id;
-            console.log(req.body)
-            db.comments.create(req.body.text).then(function (comment) {
+            var newcomment ={
+
+                comments:text
+            }
+            console.log(newcomment)
+            db.comments.create(newcomment).then(function (comment) {
                 console.log("efsfsfsefsfsefsfsesf   " + comment)
-                return db.article.findByIdAndUpdate({ id }, { $push: { comments: text } }, { new: true })
+                return db.article.findByIdAndUpdate({ "_id":id }, { $push: { comments: comment._id } }, { new: true })
             }).then(function (results) {
                 console.log("WAFWAFFFFFF        " + results)
                 // If the Library was updated successfully, send it back to the client
                 res.alert("comment added")
 
-            })
-                .catch(function (err) {
+            }).catch(function (err) {
                     // If an error occurs, send it back to the client
                     res.json(err);
                 });
@@ -58,20 +61,24 @@ module.exports =
         })
 
         app.get("/allcomments/:id", function (req, res) {
-            console.log("EGHEESGSEG       " + req.params)
+            console.log("EGHEESGSEG       " + req.params.id)
             // Using our Library model, "find" every library in our db and populate them with any associated books
-            db.article.find({ _id: req.params.id })
+            db.article.find({ "_id": req.params.id })
                 // Specify that we want to populate the retrieved libraries with any associated books
                 .populate("comments")
                 .then(function (data) {
-                    // If any Libraries are found, send them to the client with any associated Books
+            console.log(data);
                     res.send(data);
+            
+                  console.log("FSEFSFSFSFEFSSFESF"+data[0])  // If any Libraries are found, send them to the client with any associated Books
                 })
                 .catch(function (err) {
                     // If an error occurs, send it back to the client
                     res.json(err);
                 });
         });
+
+        app.delete("/deletecomment")
 
 
     }

@@ -28,14 +28,14 @@ var articlesSchema = new Schema({
 
 
     },
-    comments: {
+    comments:[ {
         type: Schema.Types.ObjectId,
         ref: "Comments"
 
     }
-
+    ]
 })
 
 
-var articles = mongoose.model("Articles", articlesSchema);
-module.exports = articles;
+var Articles = mongoose.model("Articles", articlesSchema);
+module.exports = Articles;

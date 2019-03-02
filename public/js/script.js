@@ -19,10 +19,10 @@ var API = {
             type: "POST"
         })
     },
-    allComment: function (comment) {
+    allComment: function (id) {
         return $.ajax({
-            url: "/allcomments/" + comment,
-            type: "POST"
+            url: "/allcomments/" + id,
+            type: "GET"
         })
     }
 };
@@ -40,24 +40,31 @@ var save = function () {
 
     var id = idpre.id;
     console.log(id)
-    // name = name.replace(/\s*,\s*/g, ",");
-    //console.log($(this).parent().children("href").text());
-    //console.log($(this).parent().data())
-    //  console.log(name)
+  
     API.saveArticle(id).then(function (data) {
         console.log(data)
     })
 }
 
 var allC = function () {
-
-    var idpre = $(this).parent().text();
-
-
     var text = $(this).parent().data().id;
     console.log(text)
     API.allComment(text).then(function (response) {
-        console.log(response)
+        console.log(response[0].comments[0].comments);
+       //var results= $("<p></p>").text(response.comments);
+            console.log(response[0].comments.length)
+        for (var i = 0; i < response[0].comments.length; i++){
+      
+        $("body").append(response[0].comments[i].comments);
+        var text = $("p").addClass("commentTextS").text(response[0].comments[i].comments);
+var row = ("div").addClass(".row")
+
+row.append(text);
+        $(".commSection").append(row)
+
+        }
+        
+        
     })
 }
 

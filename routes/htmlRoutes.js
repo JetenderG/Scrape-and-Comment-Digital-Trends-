@@ -19,9 +19,11 @@ module.exports =
 
             db.article.find({ "_id": { $in: artSaved } }).then(function (savedarticles) {
                 console.log(savedarticles)
+                console.log(savedarticles);
                 res.render("commentA", {
                     savedarticles: savedarticles
                 })
+                
             }).catch(function (err) {
                 // res.render("commentA")
 
