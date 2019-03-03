@@ -27,6 +27,8 @@ var API = {
     }
 };
 
+
+
 var scrap = function () {
     console.log("hi")
     API.scraps().then(function (result) {
@@ -40,7 +42,7 @@ var save = function () {
 
     var id = idpre.id;
     console.log(id)
-  
+
     API.saveArticle(id).then(function (data) {
         console.log(data)
     })
@@ -51,20 +53,22 @@ var allC = function () {
     console.log(text)
     API.allComment(text).then(function (response) {
         console.log(response[0].comments[0].comments);
-       //var results= $("<p></p>").text(response.comments);
-            console.log(response[0].comments.length)
-        for (var i = 0; i < response[0].comments.length; i++){
-      
-        $("body").append(response[0].comments[i].comments);
-        var text = $("p").addClass("commentTextS").text(response[0].comments[i].comments);
-var row = ("div").addClass(".row")
+        //var results= $("<p></p>").text(response.comments);
+        console.log(response[0].comments.length)
+        for (var i = 0; i < response[0].comments.length; i++) {
 
-row.append(text);
-        $(".commSection").append(row)
+            $("body").append(response[0].comments[i].comments);
+            var commentSection = $(".commSection");
+            commentSection.empty();
+            var text = $("<p></p>").addClass("commentTextS").text(response[0].comments[i].comments);
+            var row = $("<div></div>").addClass(".row")
+
+            row.append(text);
+            commentSection.append(row)
 
         }
-        
-        
+
+
     })
 }
 

@@ -8,13 +8,12 @@
 
     </a>
 
- 
+
 
 
 
     <button type="button" class="btn btn-primary" id="populate" data-toggle="modal" data-target="#exampleModal" data-id={{this._id}}>
     </button>
-
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -26,20 +25,52 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                 <div class="container commSection">
-                           
-                    </div>
+
                 <div class="modal-body">
+                    <div class="container commSection">
+
+                    </div>
                     <form class="submitComment" action="/newcomment" method="POST">
                         <input class="idpopS" name="id" value="{{this._id}}">
                         <textarea class="textareaS" id="textComment" name="text">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="add">Save changes</button>
                     </form>
-                   
+
                 </div>
             </div>
         </div>
