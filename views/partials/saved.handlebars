@@ -1,7 +1,7 @@
 {{#each savedarticles}}
 
 <div class="row articlerow" data-id="{{this._id}}">
-    <p class=" titleS"><strong>Title :</strong>{{this.title}}</p>
+    <strong>Title :</strong><p class=" titleS">{{this.title}}</p>
     <p class="sumS"><strong>Summary :</strong>{{this.summary}}</p>
     <a href="{{this.link}}">
         <p class="linkS">Link to the main article</p>
@@ -27,12 +27,12 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="container commSection">
+                    <div class="container commSection  {{this.id}}S" data-id="{{this._id}}">
 
                     </div>
                     <form class="submitComment" action="/newcomment" method="POST">
                         <input class="idpopS" name="id" value="{{this._id}}">
-                        <textarea class="textareaS" id="textComment" name="text">
+                        <textarea class="textareaS" id="textComment" name="comments">
 
 
 

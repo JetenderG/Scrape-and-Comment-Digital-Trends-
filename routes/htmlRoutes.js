@@ -3,7 +3,7 @@ var handlebars = require("handlebars");
 module.exports =
     function (app) {
         app.get("/", function (req, res) {
-            db.article.find({})
+            db.Article.find({})
                 .then(function (allarticles) {
                     res.render("index", {
 
@@ -17,7 +17,7 @@ module.exports =
 
         app.get("/comment", function (req, res) {
 
-            db.article.find({ "_id": { $in: artSaved } }).then(function (savedarticles) {
+            db.Article.find({ "_id": { $in: artSaved } }).then(function (savedarticles) {
                 console.log(savedarticles)
                 console.log(savedarticles);
                 res.render("commentA", {
