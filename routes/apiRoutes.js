@@ -106,7 +106,3 @@ module.exports =
                 });
         });
 
-        app.delete("/deletecomment")
-
-
-    }

@@ -40,6 +40,7 @@ module.exports =
             var id = req.params.id
             artSaved.push(id)
             console.log(artSaved)
+
         });
 
 
