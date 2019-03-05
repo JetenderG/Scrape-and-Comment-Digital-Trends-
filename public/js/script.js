@@ -19,9 +19,9 @@ var API = {
             type: "POST"
         })
     },
-    allComment: function (id) {
+    allComment: function (title) {
         return $.ajax({
-            url: "/allcomments/" + id,
+            url: "/allcomments/" + title,
             type: "GET"
         })
     }
@@ -49,21 +49,27 @@ var save = function () {
 }
 
 var allC = function () {
-    var text = $(this).parent().data().id;
-    console.log(text)
+    var text = $(this).closest('.articlerow').find('.titleS').text();
+    var id =$(this).parent().data().id
+    console.log("Data from div"+text + id)
     API.allComment(text).then(function (response) {
-        console.log(response[0].comments[0].comments);
+      //  console.log(response[0].comments[0].comments);
         //var results= $("<p></p>").text(response.comments);
-        console.log(response[0].comments.length)
+      //  console.log("daaaaaaaaaaaaaaaaa        "+response[0].comments[0].comments)
         for (var i = 0; i < response[0].comments.length; i++) {
 
             $("body").append(response[0].comments[i].comments);
-            var commentSection = $(".commSection");
-            commentSection.empty();
+            var commentSection = $("."+id+"S");
+           // commentSection.empty();
+           commentSection.empty();
             var text = $("<p></p>").addClass("commentTextS").text(response[0].comments[i].comments);
             var row = $("<div></div>").addClass(".row")
-
-            row.append(text);
+            var col1 = $("<div></div>").addClass(".col");
+            var col2 = $("<div></div>").addClass(".col ");
+            var deletebtn = $("<button></button>").addClass("deletebtn");
+            col2.append(deletebtn);
+            row.append(col1,col2)
+            col1.append(text);
             commentSection.append(row)
 
         }

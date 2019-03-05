@@ -23,7 +23,7 @@ module.exports =
                 res.render("commentA", {
                     savedarticles: savedarticles
                 })
-                
+
             }).catch(function (err) {
                 // res.render("commentA")
 

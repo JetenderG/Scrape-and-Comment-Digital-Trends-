@@ -11,7 +11,6 @@ var mongdb_uri = process.env.mongdb_uri || "mongodb://localhost/mongoHeadlines";
 
 mongoose.connect(mongdb_uri)
 
-
 app.use(express.urlencoded({
     extended: false
 }));
