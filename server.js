@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var app = express();
 
 //var db = require("./models/index");
-var port = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
 var mongdb_uri = process.env.mongdb_uri || "mongodb://localhost/mongoHeadlines";
 
@@ -40,6 +40,6 @@ var syncOptions = {
     force: false,
     // logging: console.log
 };
-app.listen(port, function () {
+app.listen(PORT, function () {
     console.log("App runnning on port " + PORT);
 })
