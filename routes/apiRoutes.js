@@ -20,15 +20,15 @@ module.exports =
                     newArticle.title = $(element).find($(".m-river--title")).text()
                     newArticle.summary = $(element).find($(".m-river--content")).text()
                     newArticle.link = $(element).find($(".m-river--thumb")).children().attr("href");
-                    console.log(newArticle)
+                    //console.log(newArticle)
                     db.article.create(
                         newArticle
                     ).then(function (added) {
-                        console.log(added)
+                        //console.log(added)
 
                     })
                         .catch(function (err) {
-                            console.log(err);
+                            //console.log(err);
                         })
                 });
             });
@@ -36,41 +36,67 @@ module.exports =
         });
 
 
+        /*
+                app.post("/newcomment", function (req, res) {
+                    var id = req.body.id;
+                    var comment = req.body.text;
+                    var commentObj = {
+                        comment: comment
+                    }
+        
+                    console.log(req.body)
+        
+        
+                    db.article.findByIdAndUpdate(id, { $push: { comments: commentObj } }, { new: true })
+                        .then(function (results) {
+                            console.log("RESULTS------" + results)
+                            res.json(results)
+                        }).catch(function (err) {
+                            res.json(err);
+                        });
+                })
+        */
+
 
         app.post("/newcomment", function (req, res) {
-            var text = req.body.text;
+            //            var text = req.body.text;
             var id = req.body.id;
-            var newcomment ={
-
-                comments:text
+            console.log(req.body)
+            var newcomment = {};
+            var newcomment = {
+                comments: req.body.text
             }
-            console.log(newcomment)
+            console.log("dddddddddddddddddddddd           " + JSON.stringify(newcomment))
+
             db.comments.create(newcomment).then(function (comment) {
                 console.log("efsfsfsefsfsefsfsesf   " + comment)
-                return db.article.findByIdAndUpdate({ "_id":id }, { $push: { comments: comment._id } }, { new: true })
+                console.log("id        " + id);
+                return db.article.findByIdAndUpdate(id, { $push: { comments: comment._id } }, { new: true });
             }).then(function (results) {
                 console.log("WAFWAFFFFFF        " + results)
                 // If the Library was updated successfully, send it back to the client
-                res.alert("comment added")
+                res.send("comment added")
 
             }).catch(function (err) {
-                    // If an error occurs, send it back to the client
-                    res.json(err);
-                });
-
+                // If an error occurs, send it back to the client
+                res.send(err);
+                console.log(err)
+            });
         })
 
+
+
         app.get("/allcomments/:id", function (req, res) {
-            console.log("EGHEESGSEG       " + req.params.id)
+            //console.log("EGHEESGSEG       " + req.params.id)
             // Using our Library model, "find" every library in our db and populate them with any associated books
             db.article.find({ "_id": req.params.id })
                 // Specify that we want to populate the retrieved libraries with any associated books
                 .populate("comments")
                 .then(function (data) {
-            console.log(data);
+                    console.log(data);
                     res.send(data);
-            
-                  console.log("FSEFSFSFSFEFSSFESF"+data[0])  // If any Libraries are found, send them to the client with any associated Books
+
+                    //console.log("FSEFSFSFSFEFSSFESF" + data[0])  // If any Libraries are found, send them to the client with any associated Books
                 })
                 .catch(function (err) {
                     // If an error occurs, send it back to the client
