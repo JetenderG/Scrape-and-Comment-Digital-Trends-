@@ -17,8 +17,8 @@ module.exports =
                 // console.log(cheerio)
                 $("div.m-river--item ").each(function (i, element) {
                     newArticle = {};
-                    newArticle.title = $(element).find($(".m-river--title")).text()
-                    newArticle.summary = $(element).find($(".m-river--content")).text()
+                    newArticle.title = $(element).find($(".m-river--title")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
+                    newArticle.summary = $(element).find($(".m-river--content")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
                     newArticle.link = $(element).find($(".m-river--thumb")).children().attr("href");
                     //console.log(newArticle)
                     db.article.create(
