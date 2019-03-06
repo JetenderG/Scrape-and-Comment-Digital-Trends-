@@ -64,7 +64,7 @@ module.exports =
             console.log(req.body)
             var newcomment = {};
             var newcomment = {
-                comments: req.body.text
+                comments: req.body.comments
             }
             console.log("dddddddddddddddddddddd           " + JSON.stringify(newcomment))
 
@@ -75,7 +75,7 @@ module.exports =
             }).then(function (results) {
                 console.log("WAFWAFFFFFF        " + results)
                 // If the Library was updated successfully, send it back to the client
-                res.send("comment added")
+                res.redirect("/comment")
 
             }).catch(function (err) {
                 // If an error occurs, send it back to the client
@@ -90,12 +90,14 @@ module.exports =
 
         app.get("/allcomments/:id", function (req, res) {
             //console.log("EGHEESGSEG       " + req.params.id)
+
+            console.log("ID    " + req.params.id)
             // Using our Library model, "find" every library in our db and populate them with any associated books
             db.article.find({ "_id": req.params.id })
                 // Specify that we want to populate the retrieved libraries with any associated books
                 .populate("comments")
                 .then(function (data) {
-                    console.log(data);
+                    console.log("hello" + data);
                     res.send(data);
 
                     //console.log("FSEFSFSFSFEFSSFESF" + data[0])  // If any Libraries are found, send them to the client with any associated Books
