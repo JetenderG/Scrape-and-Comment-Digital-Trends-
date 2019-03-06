@@ -49,19 +49,25 @@ var save = function () {
 }
 
 var allC = function () {
+
+    var submitid = $(".idpopS");
     var text = $(this).closest('.articlerow').find('.titleS').text();
     var id =$(this).parent().data().id
+    console.log(id)
+
+    submitid.val(id)
+
+
     console.log("Data from div"+text + id)
-    API.allComment(text).then(function (response) {
-      //  console.log(response[0].comments[0].comments);
-        //var results= $("<p></p>").text(response.comments);
-      //  console.log("daaaaaaaaaaaaaaaaa        "+response[0].comments[0].comments)
+    API.allComment(id).then(function (response) {
+      
+        console.log("Comments :" + JSON.stringify(response))
         for (var i = 0; i < response[0].comments.length; i++) {
 
             $("body").append(response[0].comments[i].comments);
             var commentSection = $("."+id+"S");
            // commentSection.empty();
-           commentSection.empty();
+         commentSection.empty();
             var text = $("<p></p>").addClass("commentTextS").text(response[0].comments[i].comments);
             var row = $("<div></div>").addClass(".row")
             var col1 = $("<div></div>").addClass(".col");
@@ -83,5 +89,5 @@ var allC = function () {
 $(".saveS").on("click", save)
 
 $("#scrape").on("click", scrap)
-$("#populate").on("click", allC)
+$(".populate").on("click", allC)
 //$("#add").on("click", addComment)

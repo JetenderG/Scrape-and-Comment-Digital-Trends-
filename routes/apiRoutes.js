@@ -62,9 +62,10 @@ module.exports =
             //            var text = req.body.text;
             var id = req.body.id;
             console.log(req.body)
+            var userc = req.body.comments.replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
             var newcomment = {};
             var newcomment = {
-                comments: req.body.text
+                comments: userc
             }
             console.log("dddddddddddddddddddddd           " + JSON.stringify(newcomment))
 
@@ -89,20 +90,17 @@ module.exports =
 
 
         app.get("/allcomments/:id", function (req, res) {
-            //console.log("EGHEESGSEG       " + req.params.id)
+          console.log("EGHEESGSEG       " + req.params.id)
             // Using our Library model, "find" every library in our db and populate them with any associated books
-            db.article.find({ "_id": req.params.id })
+            db.article.find({"_id":req.params.id} )
                 // Specify that we want to populate the retrieved libraries with any associated books
                 .populate("comments")
-                .then(function (data) {
-                    console.log(data);
-                    res.send(data);
+                .exec(function (err, data) {
+                    if (err) return handleError(err);
+                    console.log("Results :" +data)
+                        res.send(data);
+                  })
+    })
 
-                    //console.log("FSEFSFSFSFEFSSFESF" + data[0])  // If any Libraries are found, send them to the client with any associated Books
-                })
-                .catch(function (err) {
-                    // If an error occurs, send it back to the client
-                    res.json(err);
-                });
-        });
-    }
+}
+ 
