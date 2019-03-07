@@ -7,7 +7,7 @@ var app = express();
 //var db = require("./models/index");
 var PORT = process.env.PORT || 3000;
 
-var mongdb_uri = process.env.mongdb_uri || "mongodb://localhost/mongoHeadlines";
+var mongdb_uri = process.env.mongdb_uri;
 
 mongoose.connect(mongdb_uri)
 
