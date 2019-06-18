@@ -7,6 +7,9 @@ Description
 
  Requirements
  -------
+*node.js*
+
+A 
 
 *mongoDB"
 
@@ -26,13 +29,15 @@ Installing
 
 *Clone repository*
 
->git clone https://github.com/JetenderG/AutoFlipperSite.git
+>git clone hhttps://github.com/JetenderG/Scrape-and-Comment-Digital-Trends-.git
 
-*npm install*
+*Install modules*
 
 >npm install*
 
+*run*
 
+>nodemon server.js
 
 Built With
 ---------
