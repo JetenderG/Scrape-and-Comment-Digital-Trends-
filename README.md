@@ -9,7 +9,9 @@ Description
  -------
 *node.js*
 
-A 
+A run time enviroment that allows to use of javasccript code outside the browser.
+
+> you can download the installer  at https://nodejs.org/en/
 
 *mongoDB"
 
