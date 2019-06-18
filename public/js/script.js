@@ -49,6 +49,8 @@ var save = function () {
 }
 
 var allC = function () {
+
+    var submitid = $(".idpopS");
     var text = $(this).closest('.articlerow').find('.titleS').text();
     var id = $(this).parent().data().id
     console.log("Data from div" + text + id)
@@ -85,5 +87,5 @@ var allC = function () {
 $(".saveS").on("click", save)
 
 $("#scrape").on("click", scrap)
-$("#populate").on("click", allC)
+$(".populate").on("click", allC)
 //$("#add").on("click", addComment)
