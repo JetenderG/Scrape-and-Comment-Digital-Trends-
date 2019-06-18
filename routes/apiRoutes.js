@@ -17,8 +17,8 @@ module.exports =
                 // console.log(cheerio)
                 $("div.m-river--item ").each(function (i, element) {
                     newArticle = {};
-                    newArticle.title = $(element).find($(".m-river--title")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
-                    newArticle.summary = $(element).find($(".m-river--content")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
+                    newArticle.title = $(element).find($(".m-river--title")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm, " ").trim();
+                    newArticle.summary = $(element).find($(".m-river--content")).text().replace(/(\r\n|\n|\t|\n\t\t\t)/gm, " ").trim();
                     newArticle.link = $(element).find($(".m-river--thumb")).children().attr("href");
                     //console.log(newArticle)
                     db.article.create(
@@ -62,10 +62,10 @@ module.exports =
             //            var text = req.body.text;
             var id = req.body.id;
             console.log(req.body)
-            var userc = req.body.comments.replace(/(\r\n|\n|\t|\n\t\t\t)/gm," ").trim();
+            var userc = req.body.comments.replace(/(\r\n|\n|\t|\n\t\t\t)/gm, " ").trim();
             var newcomment = {};
             var newcomment = {
-                comments: userc
+                comments: req.body.comments
             }
             console.log("dddddddddddddddddddddd           " + JSON.stringify(newcomment))
 
@@ -76,7 +76,7 @@ module.exports =
             }).then(function (results) {
                 console.log("WAFWAFFFFFF        " + results)
                 // If the Library was updated successfully, send it back to the client
-                res.send("comment added")
+                res.redirect("/comment")
 
             }).catch(function (err) {
                 // If an error occurs, send it back to the client
@@ -90,17 +90,22 @@ module.exports =
 
 
         app.get("/allcomments/:id", function (req, res) {
-          console.log("EGHEESGSEG       " + req.params.id)
+            //console.log("EGHEESGSEG       " + req.params.id)
+
+            console.log("ID    " + req.params.id)
             // Using our Library model, "find" every library in our db and populate them with any associated books
-            db.article.find({"_id":req.params.id} )
+            db.article.find({ "_id": req.params.id })
                 // Specify that we want to populate the retrieved libraries with any associated books
                 .populate("comments")
-                .exec(function (err, data) {
-                    if (err) return handleError(err);
-                    console.log("Results :" +data)
-                        res.send(data);
-                  })
-    })
+                .then(function (data) {
+                    console.log("hello" + data);
+                    res.send(data);
 
-}
- 
+                    //console.log("FSEFSFSFSFEFSSFESF" + data[0])  // If any Libraries are found, send them to the client with any associated Books
+                })
+                .catch(function (err) {
+                    // If an error occurs, send it back to the client
+                    res.json(err);
+                });
+        });
+    }

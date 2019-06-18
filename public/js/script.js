@@ -52,29 +52,27 @@ var allC = function () {
 
     var submitid = $(".idpopS");
     var text = $(this).closest('.articlerow').find('.titleS').text();
-    var id =$(this).parent().data().id
-    console.log(id)
-
-    submitid.val(id)
-
-
-    console.log("Data from div"+text + id)
+    var id = $(this).parent().data().id
+    console.log("Data from div" + text + id)
     API.allComment(id).then(function (response) {
-      
-        console.log("Comments :" + JSON.stringify(response))
-        for (var i = 0; i < response[0].comments.length; i++) {
+        //  console.log(response[0].comments[0].comments);
+        //var results= $("<p></p>").text(response.comments);
+        //  console.log("daaaaaaaaaaaaaaaaa        "+response[0].comments[0].comments)
+        console.log("comments     :" + response)
 
+        for (var i = 0; i < response[0].comments.length; i++) {
+            console.log(response)
             $("body").append(response[0].comments[i].comments);
-            var commentSection = $("."+id+"S");
-           // commentSection.empty();
-         commentSection.empty();
+            var commentSection = $("." + id + "S");
+            // commentSection.empty();
+            commentSection.empty();
             var text = $("<p></p>").addClass("commentTextS").text(response[0].comments[i].comments);
             var row = $("<div></div>").addClass(".row")
             var col1 = $("<div></div>").addClass(".col");
             var col2 = $("<div></div>").addClass(".col ");
             var deletebtn = $("<button></button>").addClass("deletebtn");
             col2.append(deletebtn);
-            row.append(col1,col2)
+            row.append(col1, col2)
             col1.append(text);
             commentSection.append(row)
 
